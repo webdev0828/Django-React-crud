@@ -1,0 +1,126 @@
+/* style.css */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.field-error {
+    margin-left: 100px;
+}
+
+.field label {
+    width: 120px; /* Adjust the label width to your preference */
+    text-align: left;
+}
+
+.field input {
+    flex: 1;
+    padding: 5px;
+}
+
+.button-area {
+    text-align: right;
+    display: block;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #191d21 !important;
+    color: white !important;
+}
+
+.header-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.welcome {
+    width: 90%;
+}
+
+.logout {
+    place-content: space-between;
+    display: flex;
+    width: 10%;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.action-modal-overlay {
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.action-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 500px;
+}
+
+.create-button {
+    width: 100%;
+}
+
+.assessment-create-button{
+    width: 78%;
+}
+
+.filter-button {
+    width: 20%;
+}
+
+.assessment-button-area {
+    display: flex;
+    place-content: space-between;
+}
+
+.cancel-button {
+    margin-left: 15px;
+}
+
+.btn-danger {
+    margin-left: 10px;
+}
+
+.table-area {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.table {
+    margin-top: 15px;
+}
+
+.homepage{
+    margin-top: 200px;
+}

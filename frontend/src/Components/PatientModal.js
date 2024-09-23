@@ -51,14 +51,14 @@ const PatientModal = ({ isOpen, onClose, isCreate, patientToEdit, onPatientChang
 
             const method = isCreate ? 'post' : 'put';   // HTTP method based on operation
 
-            const response = await axios({
+            await axios({
                 method,
                 url,
                 data: formData,
                 headers: { Authorization: `Bearer ${token}` }, // Include the token in headers
             });
 
-            onPatientChanged(response.data); // Notify parent component of changes
+            onPatientChanged(); // Notify parent component of changes
             onClose(); // Close modal after successful submission
         } catch (error) {
             alert('Failed to save patient data : ' + error.data);

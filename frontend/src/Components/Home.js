@@ -109,7 +109,7 @@ const Home = () => {
                     </nav>
                     <div>
                         {activeTab === 'patients' && <Patient patientList={patientData} />}
-                        {activeTab === 'assessments' && <Assessment assessmentList={assessmentData} patientList={patientData} />}
+                        {activeTab === 'assessments' && <Assessment assessmentList={assessmentData} patientList={patientData}/>}
                     </div>
                 </div>
             ) : (

@@ -72,6 +72,7 @@ const AssessmentModal = ({
             questions_and_answers: questionsAnswers,
             final_score: finalScore,
         };
+        const token = localStorage.getItem('access_token');
         
         try {
             const url = isCreate 
@@ -80,13 +81,14 @@ const AssessmentModal = ({
 
             const method = isCreate ? 'post' : 'put'; // Determine HTTP method
 
-            const response = await axios({
+            await axios({
                 method,
                 url,
-                data: assessmentData, // Include authorization token
+                data: assessmentData,
+                headers: { Authorization: `Bearer ${token}` }, // Include authorization token
             });
 
-            onAssessmentChanged(response.data); // Pass updated data to parent component
+            onAssessmentChanged(); // Pass updated data to parent component
             onClose(); // Close modal after successful submission
         } catch (error) {
             alert('Failed to save assessment : ', error);

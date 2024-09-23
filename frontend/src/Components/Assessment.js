@@ -7,6 +7,7 @@ import AssessmentFilter from './AssessmentFilter';
 const Assessment = ({ assessmentList, patientList }) => {
     // State variables
     const [patientData, setPatientData] = useState([]); // Stores patient data
+    const [changedEvent, setChangedEvent] = useState(false);
     const [assessmentData, setAssessmentData] = useState([]); // Stores assessment data
     const [isModalOpen, setIsModalOpen] = useState(false); // Controls modal visibility
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false); // Controls filter modal visibility
@@ -53,7 +54,7 @@ const Assessment = ({ assessmentList, patientList }) => {
         if (assessmentList) setAssessmentData(assessmentList);
         if (patientList) setPatientData(patientList);
         fetchAssessments();
-    }, [assessmentList, patientList, currentPage, sortField, sortOrder, filterParams]);
+    }, [assessmentList, patientList, changedEvent, currentPage, sortField, sortOrder, filterParams]);
 
     // Handle filter application
     const handleFilterSet = (filters) => {
@@ -63,14 +64,8 @@ const Assessment = ({ assessmentList, patientList }) => {
     };
 
     // Handle assessment creation or update
-    const handleAssessmentChanged = (changedAssessment) => {
-        setAssessmentData((prevAssessments) =>
-            isAssessmentCreate
-                ? [...prevAssessments, changedAssessment] // Append new assessment
-                : prevAssessments.map((assessment) =>
-                    assessment.id === changedAssessment.id ? changedAssessment : assessment // Update existing assessment
-                )
-        );
+    const handleAssessmentChanged = () => {
+        setChangedEvent(prev => !prev);
     };
 
     // Handle assessment deletion
@@ -81,9 +76,7 @@ const Assessment = ({ assessmentList, patientList }) => {
             await axios.delete(`http://localhost:8000/api/assessments/${deleteAssessment.id}/`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setAssessmentData((prevAssessments) =>
-                prevAssessments.filter((assessment) => assessment.id !== deleteAssessment.id) // Remove deleted assessment
-            );
+            handleAssessmentChanged();
         } catch (error) {
             alert('Failed to delete assessment : ', error);
         }

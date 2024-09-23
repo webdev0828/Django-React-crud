@@ -6,6 +6,7 @@ import '../style.css';
 const Patient = ({ patientList }) => {
     // State for managing patient data and modal behavior
     const [patientData, setPatientData] = useState([]);
+    const [changedEvent, setChangedEvent] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPatientCreate, setIsPatientCreate] = useState(false);
     const [patientToEdit, setPatientToEdit] = useState(null);
@@ -39,20 +40,11 @@ const Patient = ({ patientList }) => {
             setPatientData(patientList);
         }
         fetchPatients();
-    }, [patientList, currentPage, sortField, sortOrder]);
+    }, [patientList, changedEvent, currentPage, sortField, sortOrder]);
 
     // Handle adding or updating a patient
-    const handlePatientChanged = (changedPatient) => {
-        if (isPatientCreate) {
-            setPatientData(prevPatients => [...prevPatients, changedPatient]); // Add new patient
-        } else {
-            // Update existing patient
-            setPatientData(prevPatients => 
-                prevPatients.map(patient => 
-                    patient.id === changedPatient.id ? changedPatient : patient
-                )
-            );
-        }
+    const handlePatientChanged = () => {
+        setChangedEvent(prev => !prev);
     };
 
     // Delete a patient record
@@ -62,9 +54,7 @@ const Patient = ({ patientList }) => {
             await axios.delete(`http://localhost:8000/api/patients/${patientToDelete.id}/`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setPatientData(prevPatients => 
-                prevPatients.filter(patient => patient.id !== patientToDelete.id)
-            ); // Remove deleted patient from state
+            handlePatientChanged();
         } catch (error) {
            alert('Failed to delete patient : ' + error);
         }

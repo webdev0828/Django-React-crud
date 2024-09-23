@@ -28,12 +28,12 @@ source venv/bin/activate  # For Linux/macOS
 venv\Scripts\activate     # For Windows  
 4.	Apply Migrations
 cd djangoTest (Backend Folder)
-pip install django
-pip install djangorestframework
-pip install djangorestframework-simplejwt
-pip install django-cors-headers
-pip install mysqlclient
-python manage.py migrate  
+pip install django  
+pip install djangorestframework  
+pip install djangorestframework-simplejwt  
+pip install django-cors-headers  
+pip install mysqlclient  
+python manage.py migrate    
 6.	Run the Development Server  
 python manage.py runserver  
 ## Frontend Setup (React.js)  

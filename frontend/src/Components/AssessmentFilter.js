@@ -13,7 +13,7 @@ const AssessmentFilter = ({ isOpen, onClose, onFilterSet, patients }) => {
     // Handles form submission to apply filters
     const handleSubmit = (e) => {
         e.preventDefault();
-        const filters = { assessment_type: assessmentType, patient: patientName, date_performed: datePerformed };
+        const filters = { assessmentType: assessmentType, patientName: patientName, datePerformed: datePerformed };
         onFilterSet(filters); // Pass filters back to parent component
     };
 

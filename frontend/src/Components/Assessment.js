@@ -31,17 +31,17 @@ const Assessment = ({ assessmentList, patientList }) => {
             const token = localStorage.getItem('access_token');
             const { assessmentType, patientName, datePerformed } = filterParams;
 
-            const queryParams = new URLSearchParams();
-            if (assessmentType) queryParams.append('assessment_type', assessmentType);
-            if (patientName) queryParams.append('patient', patientName);
-            if (datePerformed) queryParams.append('date_performed', datePerformed);
-            queryParams.append('page', currentPage);
-            queryParams.append('sort_by', sortField);
-            queryParams.append('order', sortOrder);
-
             try {
-                const response = await axios.get(`http://localhost:8000/api/assessments_list/?${queryParams.toString()}`, {
+                const response = await axios.get('http://localhost:8000/api/assessments_list/', {
                     headers: { Authorization: `Bearer ${token}` },
+                    params: {
+                        page: currentPage,
+                        sort_by: sortField,
+                        order: sortOrder,
+                        assessment_type: assessmentType,
+                        patient: patientName,
+                        date_performed: datePerformed,
+                    }
                 });
                 setAssessmentData(response.data.assessments);
                 setTotalPages(response.data.num_pages);

@@ -63,6 +63,10 @@ def assessments_list(request):
     # Filter by the logged-in clinician (user)
     clinician = request.user
     assessments = Assessment.objects.filter(clinician=clinician)  # Show only the assessments for the logged-in user
+    
+    print(assessment_type)
+    print(patient_name)
+    print(date_performed)
 
     # Filter by assessment type if provided
     if assessment_type:
@@ -101,7 +105,6 @@ def assessments_list(request):
     }, safe=False)
 
 @api_view(['POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
 def patients_operate(request, id=None):
     clinician = request.user  # Get the logged-in clinician
     
@@ -135,7 +138,6 @@ def patients_operate(request, id=None):
             return Response(status=status.HTTP_404_NOT_FOUND)
         
 @api_view(['POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
 def assessments_operate(request, id=None):
     clinician = request.user  # Get the logged-in clinician
     

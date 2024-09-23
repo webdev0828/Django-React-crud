@@ -72,7 +72,6 @@ const AssessmentModal = ({
             questions_and_answers: questionsAnswers,
             final_score: finalScore,
         };
-        const token = localStorage.getItem('access_token');
         
         try {
             const url = isCreate 
@@ -84,8 +83,7 @@ const AssessmentModal = ({
             const response = await axios({
                 method,
                 url,
-                data: assessmentData,
-                headers: { Authorization: `Bearer ${token}` }, // Include authorization token
+                data: assessmentData, // Include authorization token
             });
 
             onAssessmentChanged(response.data); // Pass updated data to parent component

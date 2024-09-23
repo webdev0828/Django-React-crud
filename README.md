@@ -28,12 +28,12 @@ source venv/bin/activate  # For Linux/macOS
 venv\Scripts\activate     # For Windows  
 4.	Apply Migrations
 cd djangoTest (Backend Folder)
-pip install django
-pip install djangorestframework
-pip install djangorestframework-simplejwt
-pip install django-cors-headers
-pip install mysqlclient
-python manage.py migrate  
+pip install django  
+pip install djangorestframework  
+pip install djangorestframework-simplejwt  
+pip install django-cors-headers  
+pip install mysqlclient  
+python manage.py migrate    
 6.	Run the Development Server  
 python manage.py runserver  
 ## Frontend Setup (React.js)  
@@ -76,3 +76,27 @@ Solution:
 &nbsp;&nbsp;Implemented token refreshing on the frontend using an Axios interceptor. When the token expired, a refresh request was sent, and the new token was stored automatically.
 
 # Additional Features and Improvements
+### Enhanced Error Handling
+Centralized error handling was implemented, including proper feedback for token expiration, validation errors, and network failures.
+### Frontend Enhancements
+Developed frontend user friendly and implemented client-side form validation to reduce the load on the backend.
+### Multi-Tenancy
+Added multi-tenancy features to ensure that clinicians only access their own patient and assessment data, preventing data leakage.
+
+# Deployment Process to AWS
+On AWS, you should set up EC2 for backend(Django), S3 for frontend(React.js) and RDS for MySQL.  
+### Backend Setup
+- On EC2 instance, you should set up Python environment using virtualenv.
+  Then, clone my project from my github repository.
+- Configure settings.py in the backend(Django) to connect to MySQL database on RDS - RDS endpoint, database name, username, password and mroe.  
+  You should migrate after configuration like local - python manage.py migrate  
+  To run backend in background, Gunicorn can be used.  
+  Configure Nginx to act as a reverse proxy that forwards requests to Gunicorn
+### Frontend Setup
+- On local machine, generate a production build of frontend - npm run build
+- S3 hosts React as a static website, so upload frontend content to S3 bucket  
+  Then, configure the bucket for statkc website hosting - index.html for entry point.  
+  AFter Backend setup and Frontend setup are finished, you should configure backend(Django) to allow CORS requests from frontend S3 domain.
+### Domain and SSL Setup
+- If you have a custom domain, you should manage DNS settings for both backend and frontend.  
+- You can use AWS Certificate Manager to generate SSL certificates for the domain.  

@@ -64,10 +64,6 @@ def assessments_list(request):
     clinician = request.user
     assessments = Assessment.objects.filter(clinician=clinician)  # Show only the assessments for the logged-in user
     
-    print(assessment_type)
-    print(patient_name)
-    print(date_performed)
-
     # Filter by assessment type if provided
     if assessment_type:
         assessments = assessments.filter(assessment_type=assessment_type)

@@ -26,7 +26,7 @@ In the project folder
 python -m venv venv  
 source venv/bin/activate  # For Linux/macOS  
 venv\Scripts\activate     # For Windows  
-4.	Apply Migrations
+4.	Apply Migrations  
 cd djangoTest (Backend Folder)  
 pip install django  
 pip install djangorestframework  
